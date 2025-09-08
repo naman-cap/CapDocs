@@ -1,0 +1,249 @@
+openapi: 3.0.1
+info:
+  title: Sample API
+  version: 1.0.0
+  description: API specification generated from cURL for POST /v2/customers
+servers:
+  - url: https://eu.api.capillarytech.com
+paths:
+  /v2/customers:
+    post:
+      summary: Operation for POST /v2/customers
+      description: Endpoint for POST /v2/customers
+      operationId: postV2customers
+      parameters:
+        - name: Accept
+          in: header
+          required: false
+          schema:
+            type: string
+            example: application/json
+        - name: Authorization
+          in: header
+          required: false
+          schema:
+            type: string
+            example: Basic bmlrZTEwMTpmZDc1MDlhNTllMjVlY2I5NGVkMmY4YjIyN2Q5ZjA2Zg==
+      responses:
+        '200':
+          description: Successful operation (default from cURL)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  createdId:
+                    type: integer
+                    example: 84230120
+                  warnings:
+                    type: array
+                    items:
+                      type: string
+                    example: []
+                  sideEffects:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        entityType:
+                          type: string
+                          example: USER
+                        rawAwardedPoints:
+                          type: integer
+                          example: 100
+                        awardedPoints:
+                          type: integer
+                          example: 100
+                        type:
+                          type: string
+                          example: points
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                profiles:
+                  type: array
+                  example:
+                    - firstName: Customer_add_23
+                      lastName: Test123
+                      identifiers:
+                        - type: mobile
+                          value: '919988221100'
+                        - type: email
+                          value: tom.sawyer@capillarytech.com
+                        - type: cardnumber
+                          value: '12345678'
+                          seriesId: 73
+                          statusLabel: ACTIVE
+                          extendedFields:
+                            custom_card_name: Mystays
+                      commChannels:
+                        - type: mobile
+                          value: '8795772141'
+                          primary: 'true'
+                          verified: 'true'
+                          meta:
+                            residence: 'true'
+                        - type: email
+                          value: tom.sawyer@capillarytech.com
+                          primary: 'true'
+                          verified: 'true'
+                          meta:
+                            residence: 'true'
+                      fields:
+                        employee: 'true'
+                        dateofbirth: 22-10-2000
+                      source: INSTORE
+                  items:
+                    type: object
+                    example:
+                      firstName: Customer_add_23
+                      lastName: Test123
+                      identifiers:
+                        - type: mobile
+                          value: '919988221100'
+                        - type: email
+                          value: tom.sawyer@capillarytech.com
+                        - type: cardnumber
+                          value: '12345678'
+                          seriesId: 73
+                          statusLabel: ACTIVE
+                          extendedFields:
+                            custom_card_name: Mystays
+                      commChannels:
+                        - type: mobile
+                          value: '8795772141'
+                          primary: 'true'
+                          verified: 'true'
+                          meta:
+                            residence: 'true'
+                        - type: email
+                          value: tom.sawyer@capillarytech.com
+                          primary: 'true'
+                          verified: 'true'
+                          meta:
+                            residence: 'true'
+                      fields:
+                        employee: 'true'
+                        dateofbirth: 22-10-2000
+                      source: INSTORE
+                    properties:
+                      firstName:
+                        type: string
+                        example: Customer_add_23
+                      lastName:
+                        type: string
+                        example: Test123
+                      identifiers:
+                        type: array
+                        example:
+                          - type: mobile
+                            value: '919988221100'
+                          - type: email
+                            value: tom.sawyer@capillarytech.com
+                          - type: cardnumber
+                            value: '12345678'
+                            seriesId: 73
+                            statusLabel: ACTIVE
+                            extendedFields:
+                              custom_card_name: Mystays
+                        items:
+                          type: object
+                          example:
+                            type: mobile
+                            value: '919988221100'
+                          properties:
+                            type:
+                              type: string
+                              example: mobile
+                            value:
+                              type: integer
+                              example: '919988221100'
+                          required:
+                            - type
+                            - value
+                      commChannels:
+                        type: array
+                        example:
+                          - type: mobile
+                            value: '8795772141'
+                            primary: 'true'
+                            verified: 'true'
+                            meta:
+                              residence: 'true'
+                          - type: email
+                            value: tom.sawyer@capillarytech.com
+                            primary: 'true'
+                            verified: 'true'
+                            meta:
+                              residence: 'true'
+                        items:
+                          type: object
+                          example:
+                            type: mobile
+                            value: '8795772141'
+                            primary: 'true'
+                            verified: 'true'
+                            meta:
+                              residence: 'true'
+                          properties:
+                            type:
+                              type: string
+                              example: mobile
+                            value:
+                              type: integer
+                              example: '8795772141'
+                            primary:
+                              type: boolean
+                              example: 'true'
+                            verified:
+                              type: boolean
+                              example: 'true'
+                            meta:
+                              type: object
+                              properties:
+                                residence:
+                                  type: boolean
+                                  example: 'true'
+                      fields:
+                        type: object
+                        properties:
+                          employee:
+                            type: boolean
+                            example: 'true'
+                          dateofbirth:
+                            type: string
+                            example: 22-10-2000
+                      source:
+                        type: string
+                        example: INSTORE
+                    required:
+                      - identifiers
+                      - source
+                extendedFields:
+                  type: object
+                  properties:
+                    acquisition_channel:
+                      type: string
+                      example: Facebook
+                referralCode:
+                  type: string
+                  example: ''
+                statusLabel:
+                  type: string
+                  example: active-1
+              description: Request body as an object
+        description: Request body
+        required: false

@@ -1,0 +1,46 @@
+openapi: 3.0.1
+info:
+  title: Sample API
+  version: 1.0.0
+  description: >-
+    API specification generated from cURL for GET
+    /integration/v1/brand/119/store-locator/custom-fields/map
+servers:
+  - url: https://sol-qa.capillarytech.com
+paths:
+  /integration/v1/brand/{brandid}/store-locator/custom-fields/map:
+    get:
+      summary: >-
+        Operation for GET
+        /integration/v1/brand/119/store-locator/custom-fields/map
+      description: >-
+        Endpoint for GET
+        /integration/v1/brand/119/store-locator/custom-fields/map
+      operationId: getIntegrationv1brand119storelocatorcustomfieldsmap
+      parameters:
+        - in: path
+          name: brandid
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Success
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error

@@ -1,0 +1,123 @@
+openapi: 3.0.1
+info:
+  title: Sample API
+  version: 1.0.0
+  description: >-
+    This API provides endpoints for retrieving information, specifically
+    focusing on locating stores.
+servers:
+  - url: https://crm-nightly-new.cc.capillarytech.com
+paths:
+  /store-locator/v1/brand/nearbystores:
+    get:
+      summary: Retrieve nearby stores
+      description: >-
+        This endpoint retrieves a paginated list of stores near a given
+        location, with optional filters for site status and actual distance
+        calculation.
+      operationId: getStorelocatorv1brandnearbystores
+      parameters:
+        - name: page
+          in: query
+          required: false
+          description: Page number for pagination.
+          schema:
+            type: integer
+            example: '0'
+        - name: actualDistance
+          in: query
+          required: false
+          description: Flag to enable actual distance calculation based on road network.
+          schema:
+            type: boolean
+            example: 'true'
+        - name: site_status
+          in: query
+          required: false
+          description: Filter stores by their operational status.
+          schema:
+            type: string
+            example: Active
+        - name: latitude
+          in: query
+          required: false
+          description: The latitude of the location to search near.
+          schema:
+            type: number
+            example: '10.817141'
+        - name: longitude
+          in: query
+          required: false
+          description: The longitude of the location to search near.
+          schema:
+            type: number
+            example: '106.707954'
+        - name: distance
+          in: query
+          required: false
+          description: >-
+            Maximum distance (in meters) from the given location to search
+            within.
+          schema:
+            type: integer
+            example: '500000'
+        - name: size
+          in: query
+          required: false
+          description: Number of results per page for pagination.
+          schema:
+            type: integer
+            example: '10'
+        - name: cap_authorization
+          in: header
+          required: false
+          schema:
+            type: string
+            example: >-
+              eyJpZHYiOlsiTU9CSUxFfDk1OTEzOTkyNDQiXSwiZGV2IjoiMTIzIiwib3JnIjoiS1JJU0hOQVNNQUxMIiwiYWxnIjoiSFMyNTYifQ.eyJpc3MiOiJDQVBJTExBUlkgVEVDSE5PTE9HSUVTIiwib2djIjpbIjUwNTgzfGtyaXNobmEudGlsbDAxIl0sImV4cCI6MTY2NDI2NjQ2OSwiaWF0IjoxNjY0MjYyODY5LCJyb2wiOiJWSUVXIn0.6ZFThZOZ6jQZ4JT-sG3DkiCBfiIxR07kjjqOYr-BJHQ
+        - name: cap_device_id
+          in: header
+          required: false
+          schema:
+            type: string
+            example: deviceId
+        - name: cap_brand
+          in: header
+          required: false
+          schema:
+            type: string
+            example: brand
+        - name: cap_mobile
+          in: header
+          required: false
+          schema:
+            type: string
+            example: identifierValue
+      responses:
+        '200':
+          description: >-
+            Successful response containing the paginated list of nearby stores
+            and related information.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    description: >-
+                      A human-readable message indicating the result of the
+                      operation.
+                    example: Success
+        '400':
+          description: Bad Request - The request was malformed or parameters were invalid.
+        '401':
+          description: Unauthorized - Authentication credentials were missing or invalid.
+        '403':
+          description: >-
+            Forbidden - The authenticated user does not have the necessary
+            permissions.
+        '404':
+          description: Not Found - The requested resource could not be found.
+        '500':
+          description: Internal Server Error - An unexpected error occurred on the server.

@@ -1,0 +1,136 @@
+openapi: 3.0.1
+info:
+  title: Create Card Series
+  version: 1.0.0
+  description: API specification generated from cURL for POST /v2/card/series/
+servers:
+  - url: https://{host}
+paths:
+  /v2/card/series/:
+    post:
+      summary: Operation for POST /v2/card/series/
+      description: Endpoint for POST /v2/card/series/
+      operationId: postV2cardseries
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          schema:
+            type: string
+            example: >-
+              Basic
+              a3Jpc2huYS50aWxsMTAwOjIwMmNiOTYyYWM1OTA3NWI5NjRiMDcxNTJkMjM0Yjcw
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              examples:
+                New Example:
+                  summary: New Example
+                  value: ''
+                Sample response:
+                  summary: Sample response
+                  value:
+                    entity: 187
+                    warnings: []
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                  example: TestCardSeries11
+                name:
+                  type: string
+                  example: TestCardSeries11
+                type:
+                  type: string
+                  example: DIGITAL
+                expiryDays:
+                  type: integer
+                  example: 1000
+                maxActiveCardsPerCustomer:
+                  type: integer
+                  example: 1
+                cardGenerationConfiguration:
+                  type: object
+                  properties:
+                    prefix:
+                      type: string
+                      example: M
+                    suffix:
+                      type: string
+                      example: C
+                    offset:
+                      type: integer
+                      example: 1
+                    length:
+                      type: integer
+                      example: 10
+                    method:
+                      type: string
+                      example: RANDOM_MOD7
+                cardGenerationEnabled:
+                  type: boolean
+                  example: true
+                isActive:
+                  type: boolean
+                  example: true
+                trigger:
+                  type: string
+                  example: SERIES_ID
+              description: Request body as an object
+              required:
+                - code
+                - type
+        description: Request body
+        required: true
+      x-readme:
+        code-samples:
+          - code: >-
+              curl --location 'https://eu.api.capillarytech.com/v2/card/series/'
+              \
+
+              --header 'Content-Type: application/json' \
+
+              --header 'Authorization: Basic YTYyZTZm' \
+
+              --header 'Cookie:
+              _cfuvid=Y0f3VfLqD8GzrSkhY4oAJF2sdcs4f0RvoHYzuwlgCKM-1751618877635-0.0.1.1-604800000'
+              \
+
+              --data '{
+                "code":"TestCardSeries123",
+                "name":"TestCardSeries123",
+                "type":"DIGITAL",
+                "expiryDays":1000,
+                "maxActiveCardsPerCustomer":1,
+                "cardGenerationConfiguration":{
+                  "prefix":"M2",
+                  "suffix":"C0",
+                  "offset":1,
+                  "length":10,
+                  "method": "RANDOM_MOD7"
+                },
+                "cardGenerationEnabled":true,
+                "isActive":true,
+                "trigger":"SERIES_ID"
+              }'
+            language: shell
+            name: Sample request
+        samples-languages:
+          - shell
+components: {}

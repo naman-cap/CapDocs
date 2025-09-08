@@ -1,0 +1,442 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Manual Currency Issue API",
+    "version": "2",
+    "description": "API for manually issuing points or alternate currencies to customers. This API supports bulk operations for issuing points based on various parameters and event types. It includes extensive validation and handles customer-level locking."
+  },
+  "servers": [
+    {
+      "url": "https://eu.api.capillarytech.com",
+      "description": "EU Server"
+    },
+    {
+      "url": "https://us.api.capillarytech.com",
+      "description": "US Server"
+    },
+    {
+      "url": "https://in.api.capillarytech.com",
+      "description": "India Server"
+    },
+    {
+      "url": "https://apac.api.capillarytech.com",
+      "description": "APAC Server"
+    }
+  ],
+  "security": [
+    {
+      "BasicAuth": []
+    }
+  ],
+  "paths": {
+    "/v2/customers/bulk/manualCurrencyAllocate": {
+      "post": {
+        "summary": "Manually issue points or alternate currencies to customers",
+        "operationId": "bulkManualCurrencyAllocation",
+        "requestBody": {
+          "description": "Array of manual currency allocation requests. Although the path indicates bulk, current implementation may process requests individually.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ManualCurrencyAllocationRequest"
+                },
+                "minItems": 1
+              },
+              "examples": {
+                "issuePointsSingle": {
+                  "summary": "Issue regular points to a single customer",
+                  "value": [
+                    {
+                      "orgId": 100737,
+                      "programId": 973,
+                      "awardStrategyId": 13167,
+                      "expiryStrategyId": 11833,
+                      "sourceValue": -1,
+                      "eventName": "TransactionAdd",
+                      "eventSourceId": "888812915",
+                      "currencyType": "REGULAR",
+                      "lookupParams": {
+                        "identifierType": "id",
+                        "identifierValue": "{{customerId}}",
+                        "source": "INSTORE",
+                        "entityType": "CUSTOMER"
+                      }
+                    }
+                  ]
+                },
+                "issueACSingle": {
+                  "summary": "Issue regular alternate currencies to a single customer",
+                  "value": [
+                    {
+                      "orgId": 100737,
+                      "programId": 973,
+                      "awardStrategyId": 13167,
+                      "expiryStrategyId": 11833,
+                      "sourceValue": -1,
+                      "eventName": "TransactionAdd",
+                      "eventSourceId": "888812915",
+                      "currencyType": "REGULAR",
+                      "alternateCurrencyIdentifier": "9DxGBP",
+                      "lookupParams": {
+                        "identifierType": "id",
+                        "identifierValue": "{{customerId}}",
+                        "source": "INSTORE",
+                        "entityType": "CUSTOMER"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful allocation response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManualCurrencyAllocationResponse"
+                },
+                "examples": {
+                  "points_awarded_to_user": {
+                    "summary": "Points awarded to user",
+                    "value": {
+                      "total": 1,
+                      "success": 1,
+                      "failures": 0,
+                      "data": [
+                        {
+                          "status": "SUCCESS",
+                          "eventLogId": 634510809,
+                          "entityId": 566135941,
+                          "sideEffects": [
+                            {
+                              "entityType": "USER",
+                              "rawAwardedPoints": 100,
+                              "customerId": 566135941,
+                              "awardedPoints": 100,
+                              "type": "points"
+                            }
+                          ]
+                        }
+                      ],
+                      "warnings": []
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BasicAuth": {
+        "type": "http",
+        "scheme": "basic",
+        "description": "HTTP Basic Authentication"
+      }
+    },
+    "schemas": {
+      "ManualCurrencyAllocationRequest": {
+        "type": "object",
+        "description": "Details for a single manual currency allocation request.",
+        "required": [
+          "orgId",
+          "programId",
+          "awardStrategyId",
+          "expiryStrategyId",
+          "sourceValue",
+          "eventName",
+          "eventSourceId",
+          "lookupParams"
+        ],
+        "properties": {
+          "orgId": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Unique identifier of the organisation.",
+            "example": 51135
+          },
+          "programId": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Unique ID of the loyalty program.",
+            "example": 2568
+          },
+          "awardStrategyId": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Unique ID for the points award strategy.",
+            "example": 108865
+          },
+          "expiryStrategyId": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Unique ID for the points expiry strategy.",
+            "example": 109345
+          },
+          "promotionId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Unique ID of the loyalty promotion to associate with the points issue.",
+            "example": -1,
+            "nullable": true
+          },
+          "sourceValue": {
+            "type": "number",
+            "format": "double",
+            "description": "Bill amount based on which points are issued.",
+            "minimum": 0,
+            "example": 1000
+          },
+          "eventName": {
+            "type": "string",
+            "description": "Type of event to associate with the allocation.",
+            "enum": [
+              "TransactionAdd",
+              "TargetCompleted",
+              "GenericEvent"
+            ],
+            "example": "TransactionAdd"
+          },
+          "eventSourceId": {
+            "type": "string",
+            "description": "Identifier related to the event. For 'TransactionAdd', this is the bill ID. For 'TargetCompleted', it can be a streak, target, or unified achieved ID. For 'GenericEvent', it's a reference ID.",
+            "example": "2152328861"
+          },
+          "currencyType": {
+            "type": "string",
+            "description": "Type of currency being allocated.",
+            "enum": [
+              "PROMISED",
+              "REGULAR"
+            ],
+            "example": "PROMISED"
+          },
+          "alternateCurrencyIdentifier": {
+            "type": "string",
+            "description": "Identifier for the alternate currency that is generated on creation. Provide this value when issuing alternate currencies.",
+            "nullable": true
+          },
+          "billLineItemId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "The ID of the line-item that is part of the bill.",
+            "nullable": true
+          },
+          "sourceValueRoundingStrategy": {
+            "type": "string",
+            "description": "Strategy for rounding the source value (total bill amount).",
+            "nullable": true,
+            "enum": [
+              "FLOOR",
+              "ACTUAL",
+              "ROUND"
+            ]
+          },
+          "pointsRoundingStrategy": {
+            "type": "string",
+            "description": "Strategy for rounding the awarded points.",
+            "nullable": true,
+            "enum": [
+              "FLOOR",
+              "ACTUAL",
+              "ROUND"
+            ]
+          },
+          "lookupParams": {
+            "type": "object",
+            "description": "Object containing details of the customer.",
+            "required": [
+              "identifierType",
+              "identifierValue",
+              "entityType",
+              "source"
+            ],
+            "properties": {
+              "identifierType": {
+                "type": "string",
+                "description": "Unique ID of the customer.",
+                "enum": [
+                  "mobile",
+                  "email",
+                  "id",
+                  "externalId"
+                ]
+              },
+              "identifierValue": {
+                "type": "string",
+                "description": "Value corresponding to the identifierType"
+              },
+              "entityType": {
+                "type": "string",
+                "description": "Type of entity for which issual is being made.",
+                "enum": [
+                  "CUSTOMER",
+                  "USERGROUP2"
+                ]
+              },
+              "accountId": {
+                "type": "string",
+                "description": "Account ID associated with the customer."
+              },
+              "source": {
+                "type": "string",
+                "description": "Source from where the customer is registered.",
+                "enum": [
+                  "WEB_ENGAGE",
+                  "FACEBOOK",
+                  "WECHAT",
+                  "MARTJACK",
+                  "TMALL",
+                  "TAOBAO",
+                  "JD",
+                  "ECOMMERCE",
+                  "MOBILE_APP",
+                  "WEBSITE",
+                  "LINE",
+                  "INSTORE"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "ManualCurrencyAllocationResponse": {
+        "type": "object",
+        "description": "Overall response for the bulk manual currency allocation request.",
+        "required": [
+          "total",
+          "success",
+          "failures"
+        ],
+        "properties": {
+          "total": {
+            "type": "integer",
+            "description": "Total number of allocation requests processed.",
+            "example": 1
+          },
+          "success": {
+            "type": "integer",
+            "description": "Number of successfully processed issual requests.",
+            "example": 1
+          },
+          "failures": {
+            "type": "integer",
+            "description": "Number of failed issual requests.",
+            "example": 0
+          },
+          "data": {
+            "type": "array",
+            "description": "Details for each processed allocation request.",
+            "items": {
+              "$ref": "#/components/schemas/ManualCurrencyAllocationResponseItem"
+            }
+          },
+          "warnings": {
+            "type": "array",
+            "description": "Any warnings encountered during processing.",
+            "items": {
+              "type": "string"
+            },
+            "example": []
+          }
+        }
+      },
+      "ManualCurrencyAllocationResponseItem": {
+        "type": "object",
+        "description": "Result of a single manual currency allocation request.",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the allocation request.",
+            "example": "SUCCESS"
+          },
+          "eventLogId": {
+            "type": "string",
+            "description": "Unique ID that is generated when the event is triggered."
+          },
+          "entityId": {
+            "type": "integer",
+            "format": "int64",
+            "description": "ID of the entity (customer or user group) to which currency was allocated.",
+            "example": 387979573
+          },
+          "sideEffects": {
+            "type": "array",
+            "description": "Details of points or other side effects of the allocation.",
+            "items": {
+              "$ref": "#/components/schemas/SideEffect"
+            },
+            "example": [
+              {
+                "entityType": "USERGROUP2",
+                "rawAwardedPoints": 500,
+                "awardedPoints": 500,
+                "type": "points"
+              }
+            ]
+          }
+        }
+      },
+      "SideEffect": {
+        "type": "object",
+        "description": "Represents the points or other side effects of an allocation.",
+        "properties": {
+          "entityType": {
+            "type": "string",
+            "description": "Entity who received the reward currency",
+            "example": "USERGROUP2"
+          },
+          "rawAwardedPoints": {
+            "type": "number",
+            "format": "double",
+            "description": "Raw points awarded before any rounding.",
+            "example": 500
+          },
+          "awardedPoints": {
+            "type": "integer",
+            "description": "Final awarded points after rounding.",
+            "example": 500
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of reward currency issued",
+            "example": "points"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "description": "Generic error response schema.",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "A unique error code identifying the type of error.",
+            "example": "ERR_INSUFFICIENT_PARAMETERS_FOR_POINTS_AWARD"
+          },
+          "message": {
+            "type": "string",
+            "description": "A human-readable error message explaining the issue.",
+            "example": "One or more required fields are missing for points award."
+          },
+          "details": {
+            "type": "array",
+            "description": "Additional details about the error, such as specific validation failures.",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        }
+      }
+    }
+  }
+}

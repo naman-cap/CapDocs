@@ -1,0 +1,189 @@
+openapi: 3.0.1
+info:
+  title: Sample API
+  version: 1.0.0
+  description: API specification generated from cURL for GET /api_gateway/v1/promotions/
+servers:
+  - url: https://{host}
+paths:
+  /api_gateway/v1/promotions/:
+    get:
+      summary: Operation for GET /api_gateway/v1/promotions/
+      description: Endpoint for GET /api_gateway/v1/promotions/
+      operationId: get_api_gatewayv1promotions
+      parameters:
+        - name: promotionIds
+          in: query
+          required: false
+          schema:
+            type: array
+            example: 68b5401db51b7777eca02900,68afffd77880ba5aa7cf2fb9
+            items:
+              type: string
+        - name: Accept
+          in: header
+          required: false
+          schema:
+            type: string
+            example: application/json
+        - name: accept
+          in: header
+          required: false
+          schema:
+            type: string
+            example: application/json
+        - name: Authorization
+          in: header
+          required: false
+          schema:
+            type: string
+            example: Basic ZGl2eWFfZG9jOmVjMzQxZjU1YTE2ODFiZWY3ZTNhNTdlYTI0YTYyZTZm
+        - name: Cookie
+          in: header
+          required: false
+          schema:
+            type: string
+            example: >-
+              _cfuvid=9oSq7qMWziCR7BHQMrLE46pnF7WobiRVUQNbpmzDGiM-1756730125036-0.0.1.1-604800000;
+              _cfuvid=y3NwvAkrzj8eN_r9Ks6WX3Iek.GUPVYJSZAsNHmZQJQ-1756803208058-0.0.1.1-604800000
+      responses:
+        '200':
+          description: Successful operation (default from cURL)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: 68b5401db51b7777eca02900
+                        name:
+                          type: string
+                          example: SeptemberPromo
+                        orgId:
+                          type: integer
+                          example: 100737
+                        priority:
+                          type: integer
+                          example: 0
+                        active:
+                          type: boolean
+                          example: true
+                        messageLabel:
+                          type: string
+                          example: ''
+                        type:
+                          type: string
+                          example: CUSTOMER
+                        condition:
+                          type: object
+                          properties:
+                            type:
+                              type: string
+                              example: CART
+                            cartCondition:
+                              type: object
+                              properties:
+                                kpi:
+                                  type: string
+                                  example: SUBTOTAL
+                                operator:
+                                  type: string
+                                  example: GREATER_THAN_OR_EQUAL
+                                value:
+                                  type: string
+                                  example: '500.000000'
+                        action:
+                          type: object
+                          properties:
+                            type:
+                              type: string
+                              example: CART_BASED
+                            cartBasedAction:
+                              type: object
+                              properties:
+                                type:
+                                  type: string
+                                  example: PERCENTAGE
+                                value:
+                                  type: string
+                                  example: '15.000000'
+                        createdBy:
+                          type: integer
+                          example: 75139931
+                        createdOn:
+                          type: integer
+                          example: 1756708893457
+                        lastUpdatedBy:
+                          type: integer
+                          example: 75139931
+                        lastUpdatedOn:
+                          type: integer
+                          example: 1756709902063
+                        startDate:
+                          type: integer
+                          example: 1756665000000
+                        endDate:
+                          type: integer
+                          example: 1759256999999
+                        campaignId:
+                          type: integer
+                          example: 264140
+                        promotionRestrictions:
+                          type: object
+                        earnLimitedToSpecificAudience:
+                          type: boolean
+                          example: true
+                        customFieldValues:
+                          type: object
+                        customerActivationRequired:
+                          type: boolean
+                          example: false
+                        mode:
+                          type: string
+                          example: DISCOUNT
+                        maxIssuancePerCustomer:
+                          type: integer
+                          example: -1
+                        isStackable:
+                          type: boolean
+                          example: false
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      x-readme:
+        code-samples:
+          - code: >-
+              curl --location
+              'https://eu.api.capillarytech.com/api_gateway/v1/promotions/?promotionIds=68b5401db51b7777eca02900%2C68afffd77880ba5aa7cf2fb9'
+              \
+
+              --header 'Accept: application/json' \
+
+              --header 'Content-Type: application/json' \
+
+              --header 'accept: application/json' \
+
+              --header 'Authorization: Basic *******' \
+
+              --header 'Cookie:
+              _cfuvid=9oSq7qMWziCR7BHQMrLE46pnF7WobiRVUQNbpmzDGiM-1756730125036-0.0.1.1-604800000;
+              _cfuvid=y3NwvAkrzj8eN_r9Ks6WX3Iek.GUPVYJSZAsNHmZQJQ-1756803208058-0.0.1.1-604800000'
+            language: shell
+            name: ''
+        samples-languages:
+          - shell
+components: {}
+x-readme: {}

@@ -1,0 +1,238 @@
+openapi: 3.0.0
+info:
+  title: GET points awarded ID
+  version: 1.0.0
+  description: This API gets the pointsAwardedId for a customer.
+servers:
+  - url: https://eu.api.capillarytech.com
+    description: EU Cluster
+  - url: https://us.api.capillarytech.com
+    description: US Cluster
+  - url: https://in.api.capillarytech.com
+    description: India Cluster
+  - url: https://apac.api.capillarytech.com
+    description: APAC Cluster
+paths:
+  /x/neo/pointsAwarded/paIds:
+    get:
+      summary: GET points awarded ID
+      operationId: listPets
+      tags:
+        - pets
+      parameters:
+        - name: start_expiry_date
+          in: query
+          description: >-
+            Start date for the data range in YYYY-MM-DD. The filter will include
+            all records from the beginning of this day.
+          required: true
+          schema:
+            type: string
+            maximum: 100
+            format: date
+        - name: end_expiry_date
+          in: query
+          description: >-
+            End date for the data range in YYYY-MM-DD. The filter will include
+            all records until the end of this day.
+          schema:
+            type: string
+            format: date
+          required: true
+        - name: point_category_id
+          in: query
+          description: >-
+            Unique identifier for a points category such as regular points,
+            promised points, trackers, alternate currencies, and external
+            trigger-based points.
+          schema:
+            type: integer
+            format: int32
+          required: true
+        - name: program_id
+          in: query
+          description: Unique ID of the loyalty program.
+          schema:
+            type: integer
+            format: int32
+          required: true
+        - name: entity_id
+          in: query
+          description: Unique ID of the customer or usergroup.
+          schema:
+            type: integer
+            format: int32
+          required: true
+        - name: status
+          in: query
+          description: 'Status of the '
+          schema:
+            type: string
+            enum:
+              - AVAILABLE
+              - REDEEMED
+              - EXPIRED
+              - CONSUMED
+              - RETURNED
+              - CONSUMED_BY_CONVERSION
+              - INACTIVE
+          required: true
+        - name: org_id
+          in: query
+          description: Unique identifier of the organisation.
+          schema:
+            type: integer
+            format: int32
+          required: false
+      responses:
+        '200':
+          description: A paged array of pets
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  redeemed_exclusive_value:
+                    type: integer
+                    description: >-
+                      Total number of points redeemed by the customer against
+                      the pointsAwardedId.
+                    format: int32
+                  returned_exclusive_value:
+                    type: integer
+                    description: >-
+                      Total number of points returned by the customer against
+                      the pointsAwardedId.
+                    format: int32
+                  event_log_id:
+                    type: integer
+                    description: Unique ID that is generated when the event is triggered.
+                    format: int64
+                  id:
+                    type: integer
+                    description: >-
+                      Unique identifier for the points awarded event
+                      (pointsAwardedId)
+                    format: int64
+                  customer_id:
+                    type: integer
+                    description: Unique ID of the customer.
+                    format: int64
+                  source_table:
+                    type: string
+                    description: Source table from where the data is retrieved.
+                    enum:
+                      - points_awarded_bill_lineitems
+                      - points_awarded
+                  points_exclusive:
+                    type: integer
+                    description: >-
+                      Total number of points earned by the customer against the
+                      pointsAwardedId.
+                    format: int32
+                  expired_exclusive_value:
+                    type: integer
+                    description: >-
+                      Total number of points expired for the customer against
+                      the pointsAwardedId.
+                    format: int32
+              examples:
+                Success response:
+                  summary: ''
+                  value:
+                    - redeemed_exclusive_value: 0
+                      returned_exclusive_value: 0
+                      event_log_id: 39032930
+                      id: 39302312
+                      customer_id: 388034468
+                      source_table: points_awarded
+                      points_exclusive: 600
+                      expired_exclusive_value: 0
+                    - redeemed_exclusive_value: 0
+                      returned_exclusive_value: 0
+                      event_log_id: 39701027
+                      id: 39322858
+                      customer_id: 388034468
+                      source_table: points_awarded
+                      points_exclusive: 200
+                      expired_exclusive_value: 0
+                    - redeemed_exclusive_value: 0
+                      returned_exclusive_value: 0
+                      event_log_id: 39032928
+                      id: 54805668
+                      customer_id: 387993857
+                      source_table: points_awarded_bill_lineitems
+                      points_exclusive: 10
+                      expired_exclusive_value: 0
+                    - redeemed_exclusive_value: 0
+                      returned_exclusive_value: 0
+                      event_log_id: 39032928
+                      id: 54805669
+                      customer_id: 387993857
+                      source_table: points_awarded_bill_lineitems
+                      points_exclusive: 10
+                      expired_exclusive_value: 0
+                    - redeemed_exclusive_value: 0
+                      returned_exclusive_value: 0
+                      event_log_id: 39032928
+                      id: 54805670
+                      customer_id: 387993857
+                      source_table: points_awarded_bill_lineitems
+                      points_exclusive: 12
+                      expired_exclusive_value: 0
+                    - redeemed_exclusive_value: 0
+                      returned_exclusive_value: 0
+                      event_log_id: 39032930
+                      id: 54805673
+                      customer_id: 388034468
+                      source_table: points_awarded_bill_lineitems
+                      points_exclusive: 10
+                      expired_exclusive_value: 0
+                    - redeemed_exclusive_value: 0
+                      returned_exclusive_value: 0
+                      event_log_id: 39032930
+                      id: 54805671
+                      customer_id: 388034468
+                      source_table: points_awarded_bill_lineitems
+                      points_exclusive: 10
+                      expired_exclusive_value: 0
+                    - redeemed_exclusive_value: 0
+                      returned_exclusive_value: 0
+                      event_log_id: 39032930
+                      id: 54805672
+                      customer_id: 388034468
+                      source_table: points_awarded_bill_lineitems
+                      points_exclusive: 12
+                      expired_exclusive_value: 0
+      description: This API gets the pointsAwardedId for a customer.
+      security:
+        - BasicAuth: []
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication
+  schemas:
+    Pet:
+      type: object
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        tag:
+          type: string
+    Pets:
+      type: array
+      items:
+        $ref: '#/components/schemas/Pet'

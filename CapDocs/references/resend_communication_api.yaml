@@ -1,0 +1,76 @@
+openapi: 3.0.0
+info:
+  title: Resend Communication
+  version: 1.0.0
+servers:
+  - url: https://{host}
+paths:
+  /v2/communications/resend:
+    post:
+      summary: Resend a communication message
+      tags:
+        - Communications
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                messageId:
+                  type: integer
+              required:
+                - messageId
+            example:
+              messageId: 1746061653596
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              examples:
+                New Example:
+                  summary: New Example
+                  value: ''
+                Created:
+                  summary: Created
+                  value:
+                    orgId: 100737
+                    undeliveredMessageId: 1746061653596
+                    resentMessageId: 1748743190124
+                    warnings: []
+                Message ID Invalid:
+                  summary: Message ID Invalid
+                  value:
+                    errors:
+                      - status: false
+                        message: >-
+                          Failed to resend message : Message not found for
+                          orgId: 100737 and messageId: 174606165
+                        code: 4223
+                Message ID format invalid:
+                  value: ''
+                New Example 1:
+                  summary: New Example 1
+                  value: ''
+                Message ID format invalid_:
+                  summary: Message ID format invalid_
+                  value: ''
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+      security:
+        - basicAuth: []
+      x-readme:
+        code-samples:
+          - code: ''
+            language: shell
+            name: ''
+        samples-languages:
+          - shell
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic

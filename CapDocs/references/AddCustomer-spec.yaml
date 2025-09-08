@@ -1,0 +1,272 @@
+openapi: 3.0.1
+info:
+  title: Sample API
+  version: 1.0.0
+  description: API specification generated from cURL for POST /v1.1/customer/add
+servers:
+  - url: https://{host}
+paths:
+  /v1.1/customer/add:
+    post:
+      summary: Operation for POST /v1.1/customer/add
+      description: Endpoint for POST /v1.1/customer/add
+      operationId: postV11customeradd
+      parameters:
+        - name: format
+          in: query
+          required: false
+          schema:
+            type: string
+            example: json
+        - name: Authorization
+          in: header
+          required: false
+          schema:
+            type: string
+            example: ••••••
+      responses:
+        '200':
+          description: Successful operation (default from cURL)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: object
+                    properties:
+                      status:
+                        type: object
+                        properties:
+                          success:
+                            type: string
+                            example: 'true'
+                          code:
+                            type: integer
+                            example: 200
+                          message:
+                            type: string
+                            example: Success
+                          total:
+                            type: string
+                            example: '1'
+                          success_count:
+                            type: string
+                            example: '1'
+                      customers:
+                        type: object
+                        properties:
+                          customer:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                user_id:
+                                  type: integer
+                                  example: 566364775
+                                firstname:
+                                  type: string
+                                  example: Raj
+                                lastname:
+                                  type: string
+                                  example: loyal
+                                mobile:
+                                  type: string
+                                  example: 9177558xx213
+                                email:
+                                  type: string
+                                  example: testing1nee113@gmail.com
+                                external_id:
+                                  type: string
+                                  nullable: true
+                                  example: null
+                                lifetime_points:
+                                  type: integer
+                                  example: 0
+                                loyalty_points:
+                                  type: integer
+                                  example: 0
+                                current_slab:
+                                  type: string
+                                  nullable: true
+                                  example: null
+                                tier_expiry_date:
+                                  type: string
+                                  nullable: true
+                                  example: null
+                                points_summaries:
+                                  type: object
+                                  properties:
+                                    points_summary:
+                                      type: array
+                                      items:
+                                        type: string
+                                      example: []
+                                lifetime_purchases:
+                                  type: integer
+                                  example: 0
+                                registered_on:
+                                  type: string
+                                  example: '2025-08-12 06:46:47'
+                                updated_on:
+                                  type: string
+                                  example: '2025-05-29 09:10:00'
+                                type:
+                                  type: string
+                                  example: NON_LOYALTY
+                                source:
+                                  type: string
+                                  example: instore
+                                fraud_status:
+                                  type: string
+                                  example: NONE
+                                reason:
+                                  type: string
+                                  example: ''
+                                custom_fields:
+                                  type: object
+                                  properties:
+                                    field:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          name:
+                                            type: string
+                                            example: address
+                                          value:
+                                            type: string
+                                            example: BTM
+                                extended_fields:
+                                  type: object
+                                  properties:
+                                    field:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          name:
+                                            type: string
+                                            example: age
+                                          value:
+                                            type: string
+                                            example: '25'
+                                subscriptions:
+                                  type: object
+                                  properties:
+                                    subscription:
+                                      type: array
+                                      items:
+                                        type: string
+                                      example: []
+                                side_effects:
+                                  type: object
+                                  properties:
+                                    effect:
+                                      type: array
+                                      items:
+                                        type: string
+                                      example: []
+                                item_status:
+                                  type: object
+                                  properties:
+                                    success:
+                                      type: string
+                                      example: 'true'
+                                    code:
+                                      type: string
+                                      example: '1000'
+                                    message:
+                                      type: string
+                                      example: >-
+                                        Customer successfully updated, Email
+                                        update is not allowed
+                                    warnings:
+                                      type: object
+                                      properties:
+                                        warning:
+                                          type: array
+                                          items:
+                                            type: string
+                                            example: '91006'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      x-readme:
+        code-samples:
+          - code: >+
+              curl --location
+              'https://eu.api.capillarytech.com/v1.1/customer/add?format=json' \
+
+              --header 'Content-Type: application/json' \
+
+              --header 'Authorization: ••••••' \
+
+              --data-raw '{
+                  "root": {
+                      "customer": [
+                          {
+                              "mobile": 9177xx811213,
+                              "email": "testing1Nee113@gmail.com",
+                              "external_id": "12on123",
+                              "firstname": "Raj",
+                              "lastname": "loyal",
+                              "updated_on": "2025-05-29 09:10:00",
+                              "registered_till": "rutuja_capillary",
+                              "associated_with": "rutuja_capillary",
+                              "type": "NON_LOYALTY",
+                              "source": "INSTORE",
+                              "accountId": "123456",
+                              "fraud_status": 
+              {
+                                  "status": "Fraud_Suspected"
+                              },
+                              "commChannels": [
+                              {
+                                  "type": "mobile",
+                                  "value": "9177xx811213",
+                                  "primary": "true",
+                                  "verified": "true",
+                                  "meta": {
+                                      "residence": "true"
+                                  }
+                              }
+                              ],
+                              "custom_fields": {
+                                  "field": [
+                                      {
+                                          "name": "City_name",
+                                          "value": "Bangalore"
+                                      },
+                                      {
+                                          "name": "address",
+                                          "value": "BTM"
+                                      }
+                                  ]
+                              },
+                              "extended_fields": {
+                                  "field": [
+                                      {
+                                              "name": "age",
+                                              "value": "25"
+                                      }
+                                  ]
+                              }
+                          }
+                      ]
+                  }
+              }
+
+            language: shell
+            name: ''
+        samples-languages:
+          - shell
+components: {}
+x-readme: {}

@@ -1,0 +1,184 @@
+openapi: 3.0.1
+info:
+  title: Sample API
+  version: 1.0.0
+  description: >-
+    API specification generated from cURL for PUT
+    /api_gateway/rewards/core/v1/vendor/119
+servers:
+  - url: https://eu.api.capillarytech.com
+paths:
+  /api_gateway/rewards/core/v1/vendor/{path param}:
+    put:
+      summary: Operation for PUT /api_gateway/rewards/core/v1/vendor/119
+      description: Endpoint for PUT /api_gateway/rewards/core/v1/vendor/119
+      operationId: putApi_gatewayrewardscorev1vendor119
+      parameters:
+        - name: Accept
+          in: header
+          required: false
+          schema:
+            type: string
+            example: application/json
+        - name: Authorization
+          in: header
+          required: false
+          schema:
+            type: string
+            example: Basic Z2VvcmdlLmRvYzg4OjY1YTA4M2I5NTFmOTBmNTU2OTQ5NWJjZDc1MWJiYmNl
+        - name: Cookie
+          in: header
+          required: false
+          schema:
+            type: string
+            example: >-
+              _cfuvid=Py8WqEd9NprkMUBFFM4pQWQmNSGjgEDnhOp1DoQoMYw-1739777165991-0.0.1.1-604800000;
+              _cfuvid=hGW.4aR53plH6yD91V3qiTbpaQWs45tjwDu8W8WQ7Vk-1741007297422-0.0.1.1-604800000;
+              _cfuvid=S.PxCyUf9ekxOmHL60DVO0Ymatc.u9ycHzTlvzKnNWU-1749708111484-0.0.1.1-604800000;
+              _cfuvid=0Fp12e4TnzsQngeuAOpWhxJ6comP.OyumTNdxdfEDnk-1755863078886-0.0.1.1-604800000
+        - in: path
+          name: path param
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: Successful operation (default from cURL)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    properties:
+                      success:
+                        type: boolean
+                        example: true
+                      code:
+                        type: integer
+                        example: 5010
+                      message:
+                        type: string
+                        example: Vendor updated successfully
+                  vendor:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 119
+                      name:
+                        type: string
+                        example: BonusLink
+                      brandId:
+                        type: integer
+                        example: 61
+                      enabled:
+                        type: boolean
+                        example: true
+                      isEncryptionRequired:
+                        type: boolean
+                        example: false
+                      vendorTypes:
+                        type: string
+                        nullable: true
+                        example: null
+                      vendorDetails:
+                        type: string
+                        nullable: true
+                        example: null
+                      type:
+                        type: string
+                        example: REWARDS
+                      createdBy:
+                        type: string
+                        nullable: true
+                        example: null
+                      lastUpdatedBy:
+                        type: integer
+                        example: 75182251
+                      createdOn:
+                        type: integer
+                        example: 1744085165000
+                      lastUpdatedOn:
+                        type: integer
+                        example: 1744085165000
+                      createdOnDateTime:
+                        type: string
+                        format: date-time
+                        example: '2025-04-08T04:06:05Z'
+                      lastUpdatedOnDateTime:
+                        type: string
+                        format: date-time
+                        example: '2025-04-08T04:06:05Z'
+                      rank:
+                        type: string
+                        nullable: true
+                        example: null
+                      code:
+                        type: string
+                        example: TEST_VENDOR46
+                      description:
+                        type: string
+                        nullable: true
+                        example: null
+                      images:
+                        type: array
+                        items:
+                          type: string
+                        example: []
+                      videos:
+                        type: array
+                        items:
+                          type: string
+                        example: []
+                      encryptionRequired:
+                        type: boolean
+                        example: false
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: BonusLink
+                enabled:
+                  type: boolean
+                  example: true
+                vendorTypes:
+                  type: string
+                  nullable: true
+                  example: null
+                type:
+                  type: string
+                  example: REWARDS
+                rank:
+                  type: string
+                  nullable: true
+                  example: null
+                code:
+                  type: string
+                  example: TEST_VENDOR46
+                description:
+                  type: string
+                  nullable: true
+                  example: null
+              description: Request body as an object
+              required:
+                - name
+                - enabled
+                - type
+        description: Request body
+        required: true

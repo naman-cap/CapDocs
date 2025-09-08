@@ -1,0 +1,210 @@
+openapi: 3.0.1
+info:
+  title: Sample API
+  version: 1.0.0
+  description: >-
+    API specification generated from cURL for POST
+    /api_gateway/rewards/core/v1/vendor/redemption/create
+servers:
+  - url: https://eu.api.capillarytech.com
+paths:
+  /api_gateway/rewards/core/v1/vendor/redemption/create:
+    post:
+      summary: Operation for POST /api_gateway/rewards/core/v1/vendor/redemption/create
+      description: Endpoint for POST /api_gateway/rewards/core/v1/vendor/redemption/create
+      operationId: postApi_gatewayrewardscorev1vendorredemptioncreate
+      parameters:
+        - name: Authorization
+          in: header
+          required: false
+          schema:
+            type: string
+            example: Basic aWFtc2hpdmblahblahNjI3YjJlODM4ZjhlMzRkNWI1YTI5MWY=
+      responses:
+        '200':
+          description: Successful operation (default from cURL)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    properties:
+                      success:
+                        type: boolean
+                        example: true
+                      code:
+                        type: integer
+                        example: 5012
+                      message:
+                        type: string
+                        example: Vendor redemption created successfully
+                  redemption:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 27802
+                      name:
+                        type: string
+                        example: jotest
+                      redemptionType:
+                        type: string
+                        example: VOUCHER
+                      enabled:
+                        type: boolean
+                        example: true
+                      lastUpdatedOn:
+                        type: integer
+                        example: 1748344737000
+                      lastUpdatedOnDateTime:
+                        type: string
+                        format: date-time
+                        example: '2025-05-27T11:18:57Z'
+                      actionCount:
+                        type: integer
+                        example: 1
+                      createdBy:
+                        type: integer
+                        example: 75161973
+                      lastUpdatedBy:
+                        type: integer
+                        example: 75161973
+                      createdOn:
+                        type: integer
+                        example: 1748344737000
+                      createdOnDateTime:
+                        type: string
+                        format: date-time
+                        example: '2025-05-27T11:18:57Z'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                brandId:
+                  type: integer
+                  example: 1
+                vendorId:
+                  type: integer
+                  example: 36
+                name:
+                  type: string
+                  example: Miles
+                redemptionType:
+                  type: string
+                  example: MILES
+                actions:
+                  type: array
+                  example:
+                    - name: add good will points
+                      execOrder: 1
+                      apiUrl: >-
+                        https://crm-nightly-new.cc.capillarytech.com/v1.1/request/add?program_id=2851
+                      apiType: POST
+                      apiHeaders:
+                        accept: application/json
+                        Content-Type: application/json
+                        Authorization: >-
+                          Basic
+                          bHVjaWF1dG9fdGlsbF8xMDoyMDJjYjk2MmFjNTkwNzViOTY0YjA3MTUyZDIzNGI3MA==
+                      apiBody: >-
+                        {"transactionId_property":
+                        "${rewardTransactionId}","customFields_property":
+                        {"customField_1_property": "${customfield_CF1}"},
+                        "fulfillmentStatus_property": "${fulfillmentStatus}"}
+                      contextKeys:
+                        voucher: response.requests.request.get(0).id
+                  items:
+                    type: object
+                    example:
+                      name: add good will points
+                      execOrder: 1
+                      apiUrl: >-
+                        https://crm-nightly-new.cc.capillarytech.com/v1.1/request/add?program_id=2851
+                      apiType: POST
+                      apiHeaders:
+                        accept: application/json
+                        Content-Type: application/json
+                        Authorization: >-
+                          Basic
+                          bHVjaWF1dG9fdGlsbF8xMDoyMDJjYjk2MmFjNTkwNzViOTY0YjA3MTUyZDIzNGI3MA==
+                      apiBody: >-
+                        {"transactionId_property":
+                        "${rewardTransactionId}","customFields_property":
+                        {"customField_1_property": "${customfield_CF1}"},
+                        "fulfillmentStatus_property": "${fulfillmentStatus}"}
+                      contextKeys:
+                        voucher: response.requests.request.get(0).id
+                    properties:
+                      name:
+                        type: string
+                        example: add good will points
+                      execOrder:
+                        type: integer
+                        example: 1
+                      apiUrl:
+                        type: string
+                        example: >-
+                          https://crm-nightly-new.cc.capillarytech.com/v1.1/request/add?program_id=2851
+                      apiType:
+                        type: string
+                        example: POST
+                      apiHeaders:
+                        type: object
+                        properties:
+                          accept:
+                            type: string
+                            example: application/json
+                          Content-Type:
+                            type: string
+                            example: application/json
+                          Authorization:
+                            type: string
+                            example: >-
+                              Basic
+                              bHVjaWF1dG9fdGlsbF8xMDoyMDJjYjk2MmFjNTkwNzViOTY0YjA3MTUyZDIzNGI3MA==
+                      apiBody:
+                        type: string
+                        example: >-
+                          {"transactionId_property":
+                          "${rewardTransactionId}","customFields_property":
+                          {"customField_1_property": "${customfield_CF1}"},
+                          "fulfillmentStatus_property": "${fulfillmentStatus}"}
+                      contextKeys:
+                        type: object
+                        properties:
+                          voucher:
+                            type: string
+                            example: response.requests.request.get(0).id
+                    required:
+                      - name
+                      - execOrder
+                      - apiType
+                responseKeys:
+                  type: array
+                  example:
+                    - voucher
+                  items:
+                    type: string
+                    example: voucher
+              description: Request body as an object
+              required:
+                - brandId
+                - vendorId
+                - actions
+                - responseKeys
+        description: Request body
+        required: true

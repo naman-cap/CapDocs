@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Content Manager</title>
+  
+  <link
+    rel="stylesheet"
+    href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css"
+  />
+</head>
+<body>
+  <div id="nc-root"></div>
+
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  
+  <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+
+  <script>
+    const { Editor } = toastui;
+
+    const TuiEditor = createClass({
+      editor: null,
+
+      componentDidMount() {
+        const { value, onChange, forID } = this.props;
+
+        this.editor = new Editor({
+          el: document.getElementById(forID),
+          initialValue: value || '',
+          previewStyle: 'vertical',
+          height: '600px',
+          initialEditType: 'wysiwyg',
+          theme: 'dark', // <-- THIS ENABLES THE DARK THEME FOR THE EDITOR
+          events: {
+            change: () => onChange(this.editor.getMarkdown()),
+          },
+        });
+      },
+
+      componentDidUpdate(prevProps) {
+        if (prevProps.value !== this.props.value && this.editor) {
+            this.editor.setMarkdown(this.props.value);
+        }
+      },
+
+      componentWillUnmount() {
+        if (this.editor) {
+          this.editor.destroy();
+        }
+      },
+      
+      render: function() {
+        return h('div', { id: this.props.forID });
+      },
+    });
+
+    CMS.registerWidget('wysiwyg', TuiEditor);
+  </script>
+</body>
+</html>

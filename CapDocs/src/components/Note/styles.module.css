@@ -1,0 +1,46 @@
+.note {
+  position: relative;
+  background: #0f2533;
+  color: #e6f0f6;
+  border-left: 4px solid #2aa7ff;
+  border-radius: 8px;
+  padding: 16px 16px 16px 16px;
+  margin: 16px 0;
+  box-shadow: 0 0 0 1px rgba(42, 167, 255, 0.15) inset, 0 8px 24px rgba(0,0,0,0.2);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.icon {
+  font-size: 20px;
+}
+
+.title {
+  color: #cfe8ff;
+}
+
+.content {
+  line-height: 1.7;
+}
+
+.content a {
+  color: #9fd2ff;
+  text-decoration: underline;
+}
+
+.content ul {
+  margin: 8px 0 0 20px;
+}
+
+.content li {
+  margin: 6px 0;
+}
+
+

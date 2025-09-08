@@ -1,0 +1,630 @@
+openapi: 3.0.1
+info:
+  title: Sample API
+  version: 1.0.0
+  description: >-
+    API specification generated from cURL for POST
+    /api_gateway/rewards/core/v1/reward/create
+servers:
+  - url: https://eu.api.capillarytech.com
+paths:
+  /api_gateway/rewards/core/v1/reward/create:
+    post:
+      summary: Operation for POST /api_gateway/rewards/core/v1/reward/create
+      description: Endpoint for POST /api_gateway/rewards/core/v1/reward/create
+      operationId: postApi_gatewayrewardscorev1rewardcreate
+      parameters:
+        - name: Accept
+          in: header
+          required: false
+          schema:
+            type: string
+            example: '*/*'
+        - name: Authorization
+          in: header
+          required: false
+          schema:
+            type: string
+            example: Basic Z2VvcmdlLmRvYzg4OjY1YTA4M2I5NTFmOTBmNTU2OTQ5NWJjZDc1MWJiYmNl
+        - name: X-CAP-API-AUTH-ORG-ID
+          in: header
+          required: false
+          schema:
+            type: string
+            example: '50339'
+        - name: Cookie
+          in: header
+          required: false
+          schema:
+            type: string
+            example: >-
+              _cfuvid=ofUFBmGsyGe5R4Cnyx_YUG1KUqHanzUQWRNvI8xjasw-1755868570822-0.0.1.1-604800000
+      responses:
+        '200':
+          description: Successful operation (default from cURL)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: object
+                    properties:
+                      success:
+                        type: boolean
+                        example: true
+                      code:
+                        type: integer
+                        example: 6002
+                      message:
+                        type: string
+                        example: Reward created successfully
+                  reward:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 90819
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                startTime:
+                  type: string
+                  format: date-time
+                  example: '2025-01-01T00:00:00Z'
+                endTime:
+                  type: string
+                  format: date-time
+                  example: '2025-12-31T23:59:59Z'
+                type:
+                  type: string
+                  example: POINTS
+                brandId:
+                  type: integer
+                  example: 61
+                priority:
+                  type: integer
+                  example: 1
+                enabled:
+                  type: boolean
+                  example: true
+                intouchPoints:
+                  type: integer
+                  example: 100
+                redemptionType:
+                  type: string
+                  example: INTOUCH_REWARD
+                intouchSeriesId:
+                  type: string
+                  example: SERIES-123
+                tier:
+                  type: string
+                  example: GOLD
+                group:
+                  type: string
+                  example: DEFAULT_GROUP
+                label:
+                  type: string
+                  example: SEASONAL
+                supplementaryCriteriaRO:
+                  type: array
+                  example:
+                    - loyaltyProgramId: 2001
+                      tierIds:
+                        - GOLD
+                        - PLATINUM
+                      partnerProgramIds:
+                        - SUBSCRIPTION_1
+                        - SUBSCRIPTION_2
+                  items:
+                    type: object
+                    example:
+                      loyaltyProgramId: 2001
+                      tierIds:
+                        - GOLD
+                        - PLATINUM
+                      partnerProgramIds:
+                        - SUBSCRIPTION_1
+                        - SUBSCRIPTION_2
+                    properties:
+                      loyaltyProgramId:
+                        type: integer
+                        example: 2001
+                      tierIds:
+                        type: string
+                        example: GOLD
+                      partnerProgramIds:
+                        type: string
+                        example: SUBSCRIPTION_1
+                geography:
+                  type: array
+                  example:
+                    - countryId: 356
+                      cityId: 1111
+                      areaId: 2222
+                      longitude: 77.5946
+                      latitude: 12.9716
+                  items:
+                    type: object
+                    example:
+                      countryId: 356
+                      cityId: 1111
+                      areaId: 2222
+                      longitude: 77.5946
+                      latitude: 12.9716
+                    properties:
+                      countryId:
+                        type: integer
+                        example: 356
+                      cityId:
+                        type: integer
+                        example: 1111
+                      areaId:
+                        type: integer
+                        example: 2222
+                      longitude:
+                        type: number
+                        example: 77.5946
+                      latitude:
+                        type: number
+                        example: 12.9716
+                languageSpecificInfo:
+                  type: array
+                  example:
+                    - languageCode: en
+                      name: 10% off on electronics
+                      description: Enjoy discount on select items.
+                      termNConditionsId: TNC-123
+                      imageId: IMG-1
+                      thumbnailId: TH-1
+                      enabled: true
+                      images:
+                        - name: banner-1
+                          altText: Banner
+                          id: IMG-1
+                          url: https://cdn.example.com/img1.jpg
+                          isExternal: true
+                      videos:
+                        - name: promo-1
+                          altText: Video
+                          id: VID-1
+                          url: https://cdn.example.com/vid1.mp4
+                          isExternal: true
+                      customFields:
+                        cf_lang_key: value
+                      richContentRO:
+                        rc_hero:
+                          content: <h1>Hero</h1>
+                          isEnabled: true
+                        rc_footer:
+                          content: <p>Footer</p>
+                          isEnabled: true
+                    - languageCode: ar
+                      name: خصم 10٪ على الإلكترونيات
+                      description: استمتع بالخصم على عناصر مختارة.
+                      termNConditionsId: TNC-123-AR
+                      imageId: IMG-1-AR
+                      thumbnailId: TH-1-AR
+                      enabled: true
+                      images: []
+                      videos: []
+                      customFields: {}
+                      richContentRO: {}
+                  items:
+                    type: object
+                    example:
+                      languageCode: en
+                      name: 10% off on electronics
+                      description: Enjoy discount on select items.
+                      termNConditionsId: TNC-123
+                      imageId: IMG-1
+                      thumbnailId: TH-1
+                      enabled: true
+                      images:
+                        - name: banner-1
+                          altText: Banner
+                          id: IMG-1
+                          url: https://cdn.example.com/img1.jpg
+                          isExternal: true
+                      videos:
+                        - name: promo-1
+                          altText: Video
+                          id: VID-1
+                          url: https://cdn.example.com/vid1.mp4
+                          isExternal: true
+                      customFields:
+                        cf_lang_key: value
+                      richContentRO:
+                        rc_hero:
+                          content: <h1>Hero</h1>
+                          isEnabled: true
+                        rc_footer:
+                          content: <p>Footer</p>
+                          isEnabled: true
+                    properties:
+                      languageCode:
+                        type: string
+                        example: en
+                      name:
+                        type: string
+                        example: 10% off on electronics
+                      description:
+                        type: string
+                        example: Enjoy discount on select items.
+                      termNConditionsId:
+                        type: string
+                        example: TNC-123
+                      imageId:
+                        type: string
+                        example: IMG-1
+                      thumbnailId:
+                        type: string
+                        example: TH-1
+                      enabled:
+                        type: boolean
+                        example: true
+                      images:
+                        type: array
+                        example:
+                          - name: banner-1
+                            altText: Banner
+                            id: IMG-1
+                            url: https://cdn.example.com/img1.jpg
+                            isExternal: true
+                        items:
+                          type: object
+                          example:
+                            name: banner-1
+                            altText: Banner
+                            id: IMG-1
+                            url: https://cdn.example.com/img1.jpg
+                            isExternal: true
+                          properties:
+                            name:
+                              type: string
+                              example: banner-1
+                            altText:
+                              type: string
+                              example: Banner
+                            id:
+                              type: string
+                              example: IMG-1
+                            url:
+                              type: string
+                              example: https://cdn.example.com/img1.jpg
+                            isExternal:
+                              type: boolean
+                              example: true
+                      videos:
+                        type: array
+                        example:
+                          - name: promo-1
+                            altText: Video
+                            id: VID-1
+                            url: https://cdn.example.com/vid1.mp4
+                            isExternal: true
+                        items:
+                          type: object
+                          example:
+                            name: promo-1
+                            altText: Video
+                            id: VID-1
+                            url: https://cdn.example.com/vid1.mp4
+                            isExternal: true
+                          properties:
+                            name:
+                              type: string
+                              example: promo-1
+                            altText:
+                              type: string
+                              example: Video
+                            id:
+                              type: string
+                              example: VID-1
+                            url:
+                              type: string
+                              example: https://cdn.example.com/vid1.mp4
+                            isExternal:
+                              type: boolean
+                              example: true
+                      customFields:
+                        type: object
+                        properties:
+                          cf_lang_key:
+                            type: string
+                            example: value
+                      richContentRO:
+                        type: object
+                        properties:
+                          rc_hero:
+                            type: object
+                            properties:
+                              content:
+                                type: string
+                                example: <h1>Hero</h1>
+                              isEnabled:
+                                type: boolean
+                                example: true
+                          rc_footer:
+                            type: object
+                            properties:
+                              content:
+                                type: string
+                                example: <p>Footer</p>
+                              isEnabled:
+                                type: boolean
+                                example: true
+                categories:
+                  type: integer
+                  example: 3001
+                communications:
+                  type: integer
+                  example: 4001
+                vendorRedemption:
+                  type: integer
+                  example: 5001
+                customFields:
+                  type: object
+                  properties:
+                    cf_reward_key:
+                      type: string
+                      example: value
+                owners:
+                  type: array
+                  example:
+                    - ownerType: LOYALTY_PROGRAM
+                      ownerId: LP-100
+                  items:
+                    type: object
+                    example:
+                      ownerType: LOYALTY_PROGRAM
+                      ownerId: LP-100
+                    properties:
+                      ownerType:
+                        type: string
+                        example: LOYALTY_PROGRAM
+                      ownerId:
+                        type: string
+                        example: LP-100
+                restrictions:
+                  type: object
+                  properties:
+                    customerLevel:
+                      type: array
+                      example:
+                        - kpi: QUANTITY
+                          repeatFrequencyType: WEEKS
+                          limit: 5
+                          interval: 1
+                          windowType: FIXED
+                          startOfCycle: '2025-01-01T00:00:00Z'
+                          weekStartDay: MONDAY
+                      items:
+                        type: object
+                        example:
+                          kpi: QUANTITY
+                          repeatFrequencyType: WEEKS
+                          limit: 5
+                          interval: 1
+                          windowType: FIXED
+                          startOfCycle: '2025-01-01T00:00:00Z'
+                          weekStartDay: MONDAY
+                        properties:
+                          kpi:
+                            type: string
+                            example: QUANTITY
+                          repeatFrequencyType:
+                            type: string
+                            example: WEEKS
+                          limit:
+                            type: integer
+                            example: 5
+                          interval:
+                            type: integer
+                            example: 1
+                          windowType:
+                            type: string
+                            example: FIXED
+                          startOfCycle:
+                            type: string
+                            format: date-time
+                            example: '2025-01-01T00:00:00Z'
+                          weekStartDay:
+                            type: string
+                            example: MONDAY
+                    rewardLevel:
+                      type: array
+                      example:
+                        - kpi: REDEMPTION_VALUE
+                          repeatFrequencyType: NO_LIMIT
+                          limit: 1000
+                          interval: null
+                          windowType: ROLLING
+                          startOfCycle: null
+                          weekStartDay: null
+                      items:
+                        type: object
+                        example:
+                          kpi: REDEMPTION_VALUE
+                          repeatFrequencyType: NO_LIMIT
+                          limit: 1000
+                          interval: null
+                          windowType: ROLLING
+                          startOfCycle: null
+                          weekStartDay: null
+                        properties:
+                          kpi:
+                            type: string
+                            example: REDEMPTION_VALUE
+                          repeatFrequencyType:
+                            type: string
+                            example: NO_LIMIT
+                          limit:
+                            type: integer
+                            example: 1000
+                          interval:
+                            type: string
+                            nullable: true
+                            example: null
+                          windowType:
+                            type: string
+                            example: ROLLING
+                          startOfCycle:
+                            type: string
+                            nullable: true
+                            example: null
+                          weekStartDay:
+                            type: string
+                            nullable: true
+                            example: null
+                groups:
+                  type: array
+                  example:
+                    - groupName: POPULAR
+                      groupRank: 1
+                    - groupName: SEASONAL
+                      groupRank: 2
+                  items:
+                    type: object
+                    example:
+                      groupName: POPULAR
+                      groupRank: 1
+                    properties:
+                      groupName:
+                        type: string
+                        example: POPULAR
+                      groupRank:
+                        type: integer
+                        example: 1
+                rewardRank:
+                  type: integer
+                  example: 10
+                rewardRevenueMeta:
+                  type: array
+                  example:
+                    - commissionParticipant: BRAND
+                      cycleStartDate: '2025-01-01T00:00:00Z'
+                      cycleStartDateTime: '2025-01-01T00:00:00Z'
+                      cycleEndDate: '2025-03-31T23:59:59Z'
+                      cycleEndDateTime: '2025-03-31T23:59:59Z'
+                      commissionRate: 12.5
+                  items:
+                    type: object
+                    example:
+                      commissionParticipant: BRAND
+                      cycleStartDate: '2025-01-01T00:00:00Z'
+                      cycleStartDateTime: '2025-01-01T00:00:00Z'
+                      cycleEndDate: '2025-03-31T23:59:59Z'
+                      cycleEndDateTime: '2025-03-31T23:59:59Z'
+                      commissionRate: 12.5
+                    properties:
+                      commissionParticipant:
+                        type: string
+                        example: BRAND
+                      cycleStartDate:
+                        type: string
+                        format: date-time
+                        example: '2025-01-01T00:00:00Z'
+                      cycleStartDateTime:
+                        type: string
+                        format: date-time
+                        example: '2025-01-01T00:00:00Z'
+                      cycleEndDate:
+                        type: string
+                        format: date-time
+                        example: '2025-03-31T23:59:59Z'
+                      cycleEndDateTime:
+                        type: string
+                        format: date-time
+                        example: '2025-03-31T23:59:59Z'
+                      commissionRate:
+                        type: number
+                        example: 12.5
+                rewardRevenueDefaults:
+                  type: array
+                  example:
+                    - commissionParticipant: CAPILLARY
+                      defaultValue: 5
+                  items:
+                    type: object
+                    example:
+                      commissionParticipant: CAPILLARY
+                      defaultValue: 5
+                    properties:
+                      commissionParticipant:
+                        type: string
+                        example: CAPILLARY
+                      defaultValue:
+                        type: integer
+                        example: 5
+                paymentConfigs:
+                  type: array
+                  example:
+                    - paymentMode: FREE
+                    - paymentMode: POINTS
+                      points: 100
+                    - paymentMode: CASH
+                      cash: 50
+                    - paymentMode: POINTS_CASH
+                      points: 50
+                      cash: 25
+                    - paymentMode: CONV_RATIO
+                      conversionRatio: 2.5
+                  items:
+                    type: object
+                    example:
+                      paymentMode: FREE
+                    properties:
+                      paymentMode:
+                        type: string
+                        example: FREE
+                segment:
+                  type: array
+                  example:
+                    - segmentId: SEG-123
+                      partitionId:
+                        - P1
+                        - P2
+                  items:
+                    type: object
+                    example:
+                      segmentId: SEG-123
+                      partitionId:
+                        - P1
+                        - P2
+                    properties:
+                      segmentId:
+                        type: string
+                        example: SEG-123
+                      partitionId:
+                        type: string
+                        example: P1
+                cardSeries:
+                  type: string
+                  example: SERIES_A
+                labels:
+                  type: integer
+                  example: 9001
+              description: Request body as an object
+              required:
+                - startTime
+                - endTime
+                - type
+                - brandId
+                - redemptionType
+                - languageSpecificInfo
+        description: Request body
+        required: true

@@ -1,0 +1,61 @@
+openapi: 3.0.0
+info:
+  title: API Heading
+  version: 1.0.0
+  description: Add your API description here.
+servers:
+  - url: https://eu.api.capillarytech.com
+    description: EU Cluster
+  - url: https://us.api.capillarytech.com
+    description: US Cluster
+  - url: https://in.api.capillarytech.com
+    description: India Cluster
+  - url: https://apac.api.capillarytech.com
+    description: APAC Cluster
+security:
+  - BasicAuth: []
+paths:
+  /v3/unifiedPromotions/health:
+    get:
+      summary: GET Status of Unified Promotions API
+      description: |+
+
+      operationId: getV3unifiedPromotionshealth
+      parameters: []
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                    description: Message containing the status of the API
+                  warnings:
+                    type: object
+                    properties: {}
+                    description: Object containing details of warnings, if any.
+                  errors:
+                    type: object
+                    properties: {}
+                    description: Object containing details of errors, if any.
+              examples:
+                Success:
+                  summary: ''
+                  value:
+                    data: Unified Promotion API is up and running
+                    errors: null
+                    warnings: null
+      x-readme:
+        samples-languages:
+          - shell
+      security: []
+components:
+  securitySchemes:
+    BasicAuth:
+      type: apiKey
+      in: header
+      name: X-API-KEY
+      description: API Key authentication
